@@ -3,24 +3,30 @@ const mongoose = require('mongoose');
 
 const userShema = new mongoose.Schema({
 
-    username: {
-        type: String,
-        required: [true, 'Username is required!'],
-        minLength: 4, 
-    },
     email: {
         type: String,
-        minLength: 10, 
-
+        // minLength: 10, 
+        match: [/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Invalid URL'],
         required: [true, 'Email is required!'],
 
     },
     password: {
         type: String,
         required: [true, 'Password is required!'],
-        minLength: 3,
+        //minLength: 3,
     },
-
+    gender: {
+        type: String,
+        enum: {
+            values: ['female', 'male'],
+            message: 'Invalid paymentmethod',
+        },
+        required: true,
+    },
+    history: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Trip',
+    },
 });
 
 //userShema.virtual('confirmPassword').set;
