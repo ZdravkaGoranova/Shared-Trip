@@ -1,17 +1,40 @@
 
-    <section class="register-form-container">
+    <main>
+        <section class="py-5" id="register-page">
+            <div class="container register-page">
+                <h1>Register</h1>
+                <div class="register">
+                    <form method="POST">
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="text" class="form-control" id="email" placeholder="Enter email" name="email"
+                                value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Password" name="password"
+                                value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="rePassword">Re-Password</label>
+                            <input type="password" class="form-control" id="rePassword" placeholder="Re-Password"
+                                name="rePassword" value="">
+                        </div>
+                        <label>Gender</label>
+                        <div class="gender">
+                            <input type="radio" id="female" name="female" value="">
+                            <label for="female">Female</label>
+                            <input type="radio" id="male" name="male" value="" checked>
+                            <label for="male">Male</label>
+                        </div>
+                        <div class="form-group">
+                            <p>Already have account? <a href="/login">Login Now!</a></p>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
 
-        <form  method="POST">
-            <h3>Register</h3>
-            <label>Email</label>
-            <input type="email" name="email" class="box" id="">
-            <label>Username</label>
-            <input type="text" name="username" class="box" id="">
-            <label>Password</label>
-            <input type="password" name="password" class="box" id="">
-            <label>Confirm Password</label>
-            <input type="password" name="confirmPassword" class="box" id="">
-            <input type="submit" value="Register" class="btn">
-            <p>Have an account ? <a href="/login">Click here</a></p>
-        </form>
-    </section>
+   
