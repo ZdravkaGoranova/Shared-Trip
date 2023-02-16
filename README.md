@@ -1,2 +1,2 @@
-# Shared-Trip
-JS Back-End Exam - 27 June 2021
+# Crypto-Trade
+JS Back-End Exam – Crypto Trade
