@@ -25,9 +25,7 @@ exports.register = async (email, password ,rePassword, gender) => {
         throw new Error('User  exists!');
     }
 
-    if (gender) {
-        throw new Error('Gender  exists!');
-    }
+
 
 
     if (password.length < 4) {
@@ -60,7 +58,7 @@ exports.login = async (email,  password) => {
     const payload = {
         _id: user._id,
         email,
-        username: user.username,
+       
     };
 
     const token = await jwt.sing(payload, SECRET);

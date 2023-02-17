@@ -80,22 +80,25 @@ exports.getEditCrypto = async (req, res) => {
         return res.render('home/404')// throw new Error('You are not an owner!');
     }
 
-    res.render('sharedTrips/edit', { trip });
+    res.render('book/edit', { trip });
 };
 
 exports.postEditCrypto = async (req, res) => {
 
-    const { title, author, image, tripReview, genre, stars, wishingList } = req.body
+    const { startPoint, endPoint, date, time, image, brand, seats, price, description, buddies } = req.body
 
     try {
         await tripServices.update(req.params.tripId, {
-            title,
-            author,
+            startPoint,
+            endPoint,
+            date,
+            time,
             image,
-            tripReview,
-            genre,
-            stars,
-            wishingList
+            brand,
+            seats,
+            price,
+            description,
+            buddies,
         })
     } catch (error) {
         // console.log(error.message);

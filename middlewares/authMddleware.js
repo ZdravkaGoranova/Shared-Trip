@@ -15,8 +15,8 @@ exports.authentication = async (req, res, next) => {
 
         } catch (err) {
             res.clearCookie('auth');
-
             return res.status(401).render('home/404');
+           // return res.status(401).render('auth/login');
         }
     }
     //req.user = {};ako e undefinde да върне false
