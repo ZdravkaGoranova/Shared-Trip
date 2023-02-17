@@ -29,7 +29,7 @@ exports.delete = (bookId) => Trip.findByIdAndDelete(bookId);
 
 exports.getMyWishTrip = (userId) => Trip.find({ wishingList: userId}).lean();
 
-
+exports.getDriver = (userId) => Trip.find({ creator: userId}).lean();
 
 exports.wish = async (userId, bookId, req, res) => {
     const book = await Trip.findById(bookId);

@@ -52,6 +52,9 @@ exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req
     const trip = await tripServices.getOne(req.params.tripId);
     console.log(trip)
 
+    const driver = req.user.email;
+
+
     const isOwner = tripUtils.isOwner(req.user, trip);//const isOwner = crypto.owner==req.user._id;
 
     const isWished = trip.wishingList?.some(id => id == req.user?._id);
@@ -68,7 +71,7 @@ exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req
     // console.log(`=========================================`)
     // console.log(crypto.owner.toString())
 
-    res.render('book/details', { trip, isOwner, isWished });
+    res.render('book/details', { trip, isOwner, isWished,driver });
 };
 
 exports.getEditCrypto = async (req, res) => {
