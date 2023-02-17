@@ -8,7 +8,6 @@ const { getErrorMessage } = require('../utils/errorUtils.js')
 const { isAuth, authentication } = require('../middlewares/authMddleware.js');
 
 
-
 exports.getCreateCrypto = (req, res) => {//router.get('/'create',isAuth,(req, res))=>{
     console.log(req.user);
 
@@ -51,10 +50,9 @@ exports.postCreateCrypto = async (req, res) => {
 exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req,res)=>{)
 
     const trip = await tripServices.getOne(req.params.tripId);
-    //console.log(crypto)
+    console.log(trip)
 
     const isOwner = tripUtils.isOwner(req.user, trip);//const isOwner = crypto.owner==req.user._id;
-    // console.log(isOwner)
 
     const isWished = trip.wishingList?.some(id => id == req.user?._id);
     //console.log(isWished)
