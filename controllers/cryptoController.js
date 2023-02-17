@@ -50,9 +50,9 @@ exports.postCreateCrypto = async (req, res) => {
 exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req,res)=>{)
 
     const trip = await tripServices.getOne(req.params.tripId);
-    console.log(trip)
+   // console.log(trip)
 
-    const driver = req.user.email;
+
 
     const availableSeats = trip.seats;
     console.log(availableSeats)
@@ -73,6 +73,12 @@ exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req
 
     const buddiesEmails = buddiesMeail.buddies.map(buddy => buddy.email);
     console.log(buddiesEmails);
+
+    const driver =buddiesEmails[0] //req.user.email;
+    console.log(driver)
+
+    
+
     const sharedBuddiesString = buddiesEmails.join(', ');
     console.log(sharedBuddiesString);
 
@@ -166,8 +172,6 @@ exports.getJoin = async (req, res) => {//router.get('/:cryptoId/buy',isAuth)
 }
 
 
-
-
 exports.getProfile = async (req, res) => {
 
     const userId = req.user._id;
@@ -178,12 +182,6 @@ exports.getProfile = async (req, res) => {
     res.render('trip/profile', { user, wished });
 
 }
-
-
-
-
-
-
 
 
 //     try {
