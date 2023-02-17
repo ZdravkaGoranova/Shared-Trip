@@ -54,11 +54,27 @@ exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req
 
     const driver = req.user.email;
 
+    const availableSeats = trip.seats;
+    console.log(availableSeats)
 
     const isOwner = tripUtils.isOwner(req.user, trip);//const isOwner = crypto.owner==req.user._id;
 
-    const isWished = trip.wishingList?.some(id => id == req.user?._id);
-    //console.log(isWished)
+    //const isWished = trip.wishingList?.some(id => id == req.user?._id);
+
+    const isBuddies = trip.buddies?.some(id => id == req.user?._id);
+    console.log(isBuddies)
+
+
+    const buddiesMeail = await tripServices.getBuddiesMail(req.params.tripId);
+   // console.log(req.params.tripId)
+   // console.log(buddiesMeail)
+    
+    console.log(buddiesMeail.buddies)
+
+    const buddiesEmails = buddiesMeail.buddies.map(buddy => buddy.email);
+    console.log(buddiesEmails);
+
+
     //crypto.paymentMethod = paymentMethodsMap[crypto.paymentMethod]
 
     if (!trip) {
@@ -71,7 +87,7 @@ exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req
     // console.log(`=========================================`)
     // console.log(crypto.owner.toString())
 
-    res.render('book/details', { trip, isOwner, isWished,driver });
+    res.render('book/details', { trip, isOwner, isBuddies, driver, availableSeats,buddiesEmails });
 };
 
 exports.getEditCrypto = async (req, res) => {
@@ -125,16 +141,30 @@ exports.getDeleteCrypto = async (req, res) => {
     res.redirect('/catalog');
 };
 
-exports.getWish = async (req, res) => {//router.get('/:cryptoId/buy',isAuth)
+// exports.getWish = async (req, res) => {//router.get('/:cryptoId/buy',isAuth)
+//     // const crypto = await cryptoService.getOne(req.params.cryptoId);
+//     // const isOwner = cryptoUtils.isOwner(req.user, crypto);
+//     try {
+//         await tripServices.wish(req.user._id, req.params.tripId, req, res);
+//     } catch (error) {
+//         return res.status(400).render('home/404', { error: getErrorMessage(error) })
+//     }
+//     res.redirect(`/sharedTrips/${req.params.tripId}/details`);
+// }
+
+
+exports.getJoin = async (req, res) => {//router.get('/:cryptoId/buy',isAuth)
     // const crypto = await cryptoService.getOne(req.params.cryptoId);
     // const isOwner = cryptoUtils.isOwner(req.user, crypto);
     try {
-        await tripServices.wish(req.user._id, req.params.tripId, req, res);
+        await tripServices.join(req.user._id, req.params.tripId, req, res);
     } catch (error) {
         return res.status(400).render('home/404', { error: getErrorMessage(error) })
     }
     res.redirect(`/sharedTrips/${req.params.tripId}/details`);
 }
+
+
 
 
 exports.getProfile = async (req, res) => {

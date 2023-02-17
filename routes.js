@@ -22,7 +22,9 @@ router.post('/create', isAuth, cryptoController.postCreateCrypto);
 
 router.get('/sharedTrips/:tripId/details', cryptoController.getDetails);// router.get('/cubes/:cubeId/details', handleRequest(cubeControler.getDetails));//път към детайла
 
-router.get('/sharedTrips/:tripId/wish', isAuth, cryptoController.getWish);
+//router.get('/sharedTrips/:tripId/wish', isAuth, cryptoController.getWish);
+
+router.get('/sharedTrips/:tripId/join', isAuth, cryptoController.getJoin);
 router.get('/profile', isAuth, cryptoController.getProfile);
 
 router.get('/sharedTrips/:tripId/edit', isAuth, cryptoController.getEditCrypto);// router.get('/cubes/:cubeId/edit', isAuthenticated, handleRequest(cubeControler.getEditCube));

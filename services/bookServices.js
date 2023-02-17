@@ -27,30 +27,54 @@ exports.update = (bookId, data) => Trip.findByIdAndUpdate(bookId, data, { runVal
 exports.delete = (bookId) => Trip.findByIdAndDelete(bookId);
 
 
-exports.getMyWishTrip = (userId) => Trip.find({ wishingList: userId}).lean();
+exports.getMyWishTrip = (userId) => Trip.find({ wishingList: userId }).lean();
 
-exports.getDriver = (userId) => Trip.find({ creator: userId}).lean();
+exports.getbBuddies = (userId) => Trip.find({ buddies: userId }).lean();
 
-exports.wish = async (userId, bookId, req, res) => {
-    const book = await Trip.findById(bookId);
-    const isOwner = book.owner == req.user._id;
-    const isWish  = book.wishingList?.some(id => id == req.user?._id);
+
+exports.getBuddiesMail = (userId) => Trip.findById(userId).lean().populate({ path: 'buddies', select: 'email' });
+
+exports.join = async (userId, tripId, req, res) => {
+    const trip = await Trip.findById(tripId);
+    const isOwner = trip.owner == req.user._id;
+    const isBuddies = trip.buddies?.some(id => id == req.user?._id);
+    // const isWish  = book.wishingList?.filter(id => id == req.user?._id);
 
     if (isOwner) {
         return res.render('home/404');
         //throw new Error ('You is Owner')
     }
-    if (isWish) {
+    if (isBuddies) {
         return res.render('home/404');
         // throw new Error ('You already bought these crypto coins.')
     }
 
-    book.wishingList.push(userId);
-    return await book.save();
+    trip.buddies.push(userId);
+    return await trip.save();
+
     //console.log(crypto.buyers)
     //или Crypto.findByIdAndUpdate(cryptoId, { $push: { buyers: userId } })
 };
 
-   
 
-//     const isWish  = book.wishingList?.filter(id => id == req.user?._id);
+
+// exports.wish = async (userId, bookId, req, res) => {
+//     const book = await Trip.findById(bookId);
+//     const isOwner = book.owner == req.user._id;
+//     const isWish = book.wishingList?.some(id => id == req.user?._id);
+//     // const isWish  = book.wishingList?.filter(id => id == req.user?._id);
+
+//     if (isOwner) {
+//         return res.render('home/404');
+//         //throw new Error ('You is Owner')
+//     }
+//     if (isWish) {
+//         return res.render('home/404');
+//         // throw new Error ('You already bought these crypto coins.')
+//     }
+
+//     book.wishingList.push(userId);
+//     return await book.save();
+//     //console.log(crypto.buyers)
+//     //или Crypto.findByIdAndUpdate(cryptoId, { $push: { buyers: userId } })
+// };
