@@ -1,4 +1,5 @@
 const Trip = require('../models/Trip.js');
+const User = require('../models/User.js');
 
 const bookUtils = require('../utils/bookUtils.js');
 
@@ -16,6 +17,9 @@ exports.search = async (name, paymentMethod) => {
     return cprypto;
 };
 
+exports.getOwn = (bookId) => User.findById(bookId).lean();
+
+
 exports.getAll = () => Trip.find({}).lean();
 
 exports.create = (ownerId, cryptoData) => Trip.create({ ...cryptoData, owner: ownerId });
@@ -30,6 +34,7 @@ exports.delete = (bookId) => Trip.findByIdAndDelete(bookId);
 exports.getMyWishTrip = (userId) => Trip.find({ wishingList: userId }).lean();
 
 exports.getbBuddies = (userId) => Trip.find({ buddies: userId }).lean();
+
 
 
 exports.getBuddiesMail = (userId) => Trip.findById(userId).lean().populate({ path: 'buddies', select: 'email' });

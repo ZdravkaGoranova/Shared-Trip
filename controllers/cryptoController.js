@@ -2,6 +2,7 @@
 const router = require('express').Router();
 
 const Trip = require('../models/Trip.js');
+const User = require('../models/User.js');
 const tripServices = require('../services/bookServices.js');
 const tripUtils = require('../utils/bookUtils.js');
 const { getErrorMessage } = require('../utils/errorUtils.js')
@@ -50,37 +51,40 @@ exports.postCreateCrypto = async (req, res) => {
 exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req,res)=>{)
 
     const trip = await tripServices.getOne(req.params.tripId);
-   // console.log(trip)
-
+    //console.log(trip)
+    //console.log(trip.creator.toString())
+   
+    
+   const dDriver = await tripServices.getOwn(trip.creator.toString());
+   const driver = dDriver.email;
+   console.log(driver)
 
 
     const availableSeats = trip.seats;
-    console.log(availableSeats)
+    //console.log(availableSeats)
 
     const isOwner = tripUtils.isOwner(req.user, trip);//const isOwner = crypto.owner==req.user._id;
 
     //const isWished = trip.wishingList?.some(id => id == req.user?._id);
 
     const isBuddies = trip.buddies?.some(id => id == req.user?._id);
-    console.log(isBuddies)
+    //console.log(isBuddies)
 
 
     const buddiesMeail = await tripServices.getBuddiesMail(req.params.tripId);
    // console.log(req.params.tripId)
    // console.log(buddiesMeail)
     
-    console.log(buddiesMeail.buddies)
+    //console.log(buddiesMeail.buddies)
 
     const buddiesEmails = buddiesMeail.buddies.map(buddy => buddy.email);
-    console.log(buddiesEmails);
+    //console.log(buddiesEmails);
 
-    const driver =buddiesEmails[0] //req.user.email;
-    console.log(driver)
+   
 
-    
-
+  
     const sharedBuddiesString = buddiesEmails.join(', ');
-    console.log(sharedBuddiesString);
+    //console.log(sharedBuddiesString);
 
     //crypto.paymentMethod = paymentMethodsMap[crypto.paymentMethod]
 
@@ -88,9 +92,7 @@ exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req
         return res.render('home/404');
     }
 
-    // console.log(req.user._id);
-    // console.log(req.params);
-    // console.log(req.params.cryptoId);
+    // console.log(req.user._id); // console.log(req.params);// console.log(req.params.cryptoId);
     // console.log(`=========================================`)
     // console.log(crypto.owner.toString())
 
