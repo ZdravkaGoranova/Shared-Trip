@@ -12,6 +12,7 @@ exports.authentication = async (req, res, next) => {
             req.user = decodedToken;
             res.locals.isAuthenticated = decodedToken;
             res.locals.user = decodedToken.email;
+         
 
         } catch (err) {
             res.clearCookie('auth');

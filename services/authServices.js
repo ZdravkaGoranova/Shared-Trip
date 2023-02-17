@@ -7,7 +7,7 @@ const { SECRET } = require('../constans.js')
 exports.findByUsername = (username) => User.findOne({ username });//User.exists({username})
 exports.findByEmail = (email) => User.findOne({ email });//User.exists({email})
 
-exports.register = async (email, password ,rePassword, gender) => {
+exports.register = async (email, password, rePassword, gender) => {
 
     if (password !== rePassword) {
         throw new Error('Password missmatc!');
@@ -26,21 +26,19 @@ exports.register = async (email, password ,rePassword, gender) => {
     }
 
 
-
-
     if (password.length < 4) {
         throw new Error('The password should be at least four characters long!');
     }
 
     const hashPassword = await bcrypt.hash(password, 10);
 
-    await User.create({ email, gender, password: hashPassword });
+    await User.create({gender, email, password: hashPassword });
 
     return this.login(email, password);
 };
 
 
-exports.login = async (email,  password) => {
+exports.login = async (email, password) => {
 
     //Email/User exist
     const user = await this.findByEmail(email);

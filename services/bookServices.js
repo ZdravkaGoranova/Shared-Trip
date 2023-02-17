@@ -31,11 +31,6 @@ exports.update = (bookId, data) => Trip.findByIdAndUpdate(bookId, data, { runVal
 exports.delete = (bookId) => Trip.findByIdAndDelete(bookId);
 
 
-exports.getMyWishTrip = (userId) => Trip.find({ wishingList: userId }).lean();
-
-exports.getbBuddies = (userId) => Trip.find({ buddies: userId }).lean();
-
-
 
 exports.getBuddiesMail = (userId) => Trip.findById(userId).lean().populate({ path: 'buddies', select: 'email' });
 
@@ -64,6 +59,10 @@ exports.join = async (userId, tripId, req, res) => {
 
 
 // exports.wish = async (userId, bookId, req, res) => {
+
+
+exports.getbBuddies = (userId) => Trip.find({ buddies: userId }).lean();
+
 //     const book = await Trip.findById(bookId);
 //     const isOwner = book.owner == req.user._id;
 //     const isWish = book.wishingList?.some(id => id == req.user?._id);

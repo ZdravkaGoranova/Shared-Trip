@@ -53,11 +53,11 @@ exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req
     const trip = await tripServices.getOne(req.params.tripId);
     //console.log(trip)
     //console.log(trip.creator.toString())
-   
-    
-   const dDriver = await tripServices.getOwn(trip.creator.toString());
-   const driver = dDriver.email;
-   console.log(driver)
+
+
+    const dDriver = await tripServices.getOwn(trip.creator.toString());
+    const driver = dDriver.email;
+    console.log(driver)
 
 
     const availableSeats = trip.seats;
@@ -72,17 +72,17 @@ exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req
 
 
     const buddiesMeail = await tripServices.getBuddiesMail(req.params.tripId);
-   // console.log(req.params.tripId)
-   // console.log(buddiesMeail)
-    
+    // console.log(req.params.tripId)
+    // console.log(buddiesMeail)
+
     //console.log(buddiesMeail.buddies)
 
     const buddiesEmails = buddiesMeail.buddies.map(buddy => buddy.email);
     //console.log(buddiesEmails);
 
-   
 
-  
+
+
     const sharedBuddiesString = buddiesEmails.join(', ');
     //console.log(sharedBuddiesString);
 
@@ -96,7 +96,7 @@ exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req
     // console.log(`=========================================`)
     // console.log(crypto.owner.toString())
 
-    res.render('book/details', { trip, isOwner, isBuddies, driver, availableSeats,sharedBuddiesString});
+    res.render('book/details', { trip, isOwner, isBuddies, driver, availableSeats, sharedBuddiesString });
 };
 
 exports.getEditCrypto = async (req, res) => {
@@ -178,10 +178,18 @@ exports.getProfile = async (req, res) => {
 
     const userId = req.user._id;
     const user = req.user;
-    let wished = await tripServices.getMyWishBook(userId);
+
+    const mywished = await tripServices.getbBuddies(userId)
+    const length = mywished.length;
+
+   
     console.log(userId)
-    console.log(wished)
-    res.render('trip/profile', { user, wished });
+    // console.log(wished)
+    console.log(mywished)
+    console.log(length)
+    console.log(user)
+
+    res.render('book/profile', { user, mywished, length });
 
 }
 
