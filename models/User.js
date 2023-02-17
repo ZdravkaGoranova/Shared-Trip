@@ -19,9 +19,9 @@ const userShema = new mongoose.Schema({
         type: String,
         enum: {
             values: ['female', 'male'],
-            message: 'Invalid paymentmethod',
+            message: 'Invalid gender',
         },
-        required: true,
+       // required: true,
     },
     history: {
         type: mongoose.Types.ObjectId,

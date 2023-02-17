@@ -11,6 +11,7 @@ router.get('/login', (req, res) => {
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
+    
     try {
         const token = await authService.login(email, password);
         console.log(token)
@@ -29,10 +30,10 @@ router.get('/register', (req, res) => {
 
 });
 router.post('/register', async (req, res) => {
-    const { email, password ,rePassword, gender , confirmPassword } = req.body;
+    const { email, password ,rePassword, gender } = req.body;
 
     try {
-        const token = await authService.register(email, password ,rePassword, gender , confirmPassword);
+        const token = await authService.register(email, password ,rePassword, gender);
 
         //LOGIN automatically
         res.cookie('auth', token);

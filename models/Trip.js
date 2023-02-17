@@ -15,13 +15,11 @@ const bookSchema = new mongoose.Schema({
     },
     date: {
         type: String,
-        // match: [/^http[s]?:\/\//, 'Invalid URL'],
         required: true,
 
     },
     time: {
         type: String,
-        // minLength: [10, 'Title should be at least two characters!'],
         required: true,
 
     },
@@ -37,10 +35,7 @@ const bookSchema = new mongoose.Schema({
         required: true,
         minLength: [4, 'Title should be at least two characters!'],
 
-        //     type: Number,
-        //     min: 1,
-        //     max: 5,
-        //     required: true,
+      
     },
 
     seats: {
@@ -81,6 +76,6 @@ const bookSchema = new mongoose.Schema({
 });
 
 
-const Book = mongoose.model('Book', bookSchema);
+const Trip = mongoose.model('Trip', bookSchema);
 
-module.exports = Book;
+module.exports = Trip;

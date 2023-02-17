@@ -21,6 +21,7 @@
             <img class="logo" src="/static/images/before.png" alt="before-logo">
             <img class="car logo" src="/static/images/trip-logo.png" alt="trip-logo">
             <img class="logo" src="/static/images/after.png" alt="after-logo">
+            
             <div class="collapse navbar-collapse" id="navbarResponsive">
 
                 <ul class="navbar-nav ml-auto">
@@ -40,7 +41,7 @@
                         <a class="nav-link" href="/profile">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/logout">Logout as [ test@abv.bg ]</a>
+                        <a class="nav-link" href="/logout">Logout as [ {{user}}]</a>
                     </li> {{else}}
                     <!-- Guest users -->
                     <li class="nav-item">
