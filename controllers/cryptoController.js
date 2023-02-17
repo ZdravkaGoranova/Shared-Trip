@@ -73,7 +73,8 @@ exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req
 
     const buddiesEmails = buddiesMeail.buddies.map(buddy => buddy.email);
     console.log(buddiesEmails);
-
+    const sharedBuddiesString = buddiesEmails.join(', ');
+    console.log(sharedBuddiesString);
 
     //crypto.paymentMethod = paymentMethodsMap[crypto.paymentMethod]
 
@@ -87,7 +88,7 @@ exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req
     // console.log(`=========================================`)
     // console.log(crypto.owner.toString())
 
-    res.render('book/details', { trip, isOwner, isBuddies, driver, availableSeats,buddiesEmails });
+    res.render('book/details', { trip, isOwner, isBuddies, driver, availableSeats,sharedBuddiesString});
 };
 
 exports.getEditCrypto = async (req, res) => {

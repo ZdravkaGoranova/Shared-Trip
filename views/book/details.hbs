@@ -20,9 +20,9 @@
                     <div>
                         <!-- if there are joined buddies for the current trip separate them with comma and space", " -->
                         
-                        {{#each buddiesEmails}}
-                        <p>{{this}}</p>
-                        {{/each}}
+                        {{#if sharedBuddiesString}}
+                        <p>{{sharedBuddiesString}}</p>
+                        {{/if}}
 
                         {{else}}
                         <!-- If not display: -->
